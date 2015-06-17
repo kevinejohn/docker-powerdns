@@ -16,7 +16,7 @@ Upstream links:
           --rm \
           postgres
 
-* Start the PowerDNS
+* Start the PowerDNS container
 
         docker run \
           --link pdns-postgres:pdns \
