@@ -20,7 +20,7 @@ Upstream links:
 
         docker run \
           --link pdns-postgres:pdns \
-          --rm \
+          --rm -it \
           -p 53:53 \
           kevinejohn/powerdns \
           start_pdns

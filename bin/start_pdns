@@ -2,12 +2,11 @@
 
 mkdir -p /etc/powerdns/pdns.d
 
-# File: /etc/powerdns/pdns.d/pdns.local.gpgsql.conf
 cat >/etc/powerdns/pdns.d/pdns.local.gpgsql.conf <<EOF
 # PostgreSQL Configuration
 #
 # Launch gpgsql backend
-launch+=gpgsql
+launch=gpgsql
 
 # gpgsql parameters
 gpgsql-host=$PDNS_PORT_5432_TCP_ADDR
@@ -22,16 +21,30 @@ EOF
 mkdir -p /etc/powerdns
 
 cat >/etc/powerdns/pdns.conf <<EOF
+# PostgreSQL Configuration
+#
+# Launch gpgsql backend
 launch=gpgsql
+
+# gpgsql parameters
+gpgsql-host=$PDNS_PORT_5432_TCP_ADDR
+gpgsql-port=$PDNS_PORT_5432_TCP_PORT
+gpgsql-dbname=$PDNS_ENV_POSTGRES_USER
+gpgsql-user=$PDNS_ENV_POSTGRES_USER
+gpgsql-password=$PDNS_ENV_POSTGRES_PASSWORD
+gpgsql-dnssec=yes
 EOF
 
-# Initialize Database
+
+# Initialize Database Schema
 export PGPASSWORD=$PDNS_ENV_POSTGRES_PASSWORD
 psql -h $PDNS_PORT_5432_TCP_ADDR -d $PDNS_ENV_POSTGRES_USER -U $PDNS_ENV_POSTGRES_USER -f /usr/share/doc/pdns-backend-pgsql/schema.pgsql.sql
 
 # Start PowerDNS
 # same as /etc/init.d/pdns monitor
-/usr/sbin/pdns_server --daemon=no --guardian=no --control-console --loglevel=9
+echo "Starting PowerDNS..."
+exec /usr/sbin/pdns_server --daemon=no --guardian=no --control-console --loglevel=9
+
 
 
 
