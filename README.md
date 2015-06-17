@@ -9,18 +9,18 @@ Upstream links:
 
 * Start a Postgresql docker container
 
-    docker run --name pdns-postgres \
-      -v /pdns:/var/lib/postgresql/data \
-      -e POSTGRES_USER=someuser \
-      -e POSTGRES_PASSWORD=somepassword \
-      --rm \
-      postgres
+        docker run --name pdns-postgres \
+          -v /pdns:/var/lib/postgresql/data \
+          -e POSTGRES_USER=someuser \
+          -e POSTGRES_PASSWORD=somepassword \
+          --rm \
+          postgres
 
 * Start the PowerDNS
 
-    docker run \
-      --link pdns-postgres:pdns \
-      --rm \
-      -p 53:53 \
-      kevinejohn/powerdns \
-      start_pdns
+        docker run \
+          --link pdns-postgres:pdns \
+          --rm \
+          -p 53:53 \
+          kevinejohn/powerdns \
+          start_pdns
