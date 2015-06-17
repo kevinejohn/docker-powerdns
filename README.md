@@ -13,7 +13,6 @@ Upstream links:
       -v /pdns:/var/lib/postgresql/data \
       -e POSTGRES_USER=someuser \
       -e POSTGRES_PASSWORD=somepassword \
-      -p 5432:5432 \
       --rm \
       postgres
 
@@ -22,5 +21,6 @@ Upstream links:
     docker run \
       --link pdns-postgres:pdns \
       --rm \
+      -p 53:53 \
       kevinejohn/powerdns \
       start_pdns
