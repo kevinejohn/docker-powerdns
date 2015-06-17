@@ -1,5 +1,8 @@
 # PowerDNS for Docker
 
+Extensively tested on [Digital Ocean $5/mo node](http://bit.ly/1Lgakgl).
+
+
 Upstream links:
 
 * Docker Registry @ [kevinejohn/powerdns](https://registry.hub.docker.com/u/kevinejohn/powerdns)
@@ -10,7 +13,7 @@ Upstream links:
 * Start a Postgresql docker container
 
         docker run --name pdns-postgres \
-          -v /pdns:/var/lib/postgresql/data \
+          -v /powerdns:/var/lib/postgresql/data \
           -e POSTGRES_USER=someuser \
           -e POSTGRES_PASSWORD=somepassword \
           --rm \
