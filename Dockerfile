@@ -12,5 +12,7 @@ RUN apt-get update && \
 # Internally uses port 53, remap using docker
 EXPOSE 53
 
+CMD ["powerdns_run"]
+
 ADD ./bin /usr/local/bin
 RUN chmod a+x /usr/local/bin/*

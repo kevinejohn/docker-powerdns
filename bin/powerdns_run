@@ -43,10 +43,9 @@ psql -h $PDNS_PORT_5432_TCP_ADDR -p $PDNS_PORT_5432_TCP_PORT -d $PDNS_ENV_POSTGR
 # Start PowerDNS
 # same as /etc/init.d/pdns monitor
 echo "Starting PowerDNS..."
-exec /usr/sbin/pdns_server --daemon=no --guardian=no --control-console --loglevel=9
 
-
-
-
-
-
+if [ "$#" -gt 0 ]; then
+  exec /usr/sbin/pdns_server "$@"
+else
+  exec /usr/sbin/pdns_server --daemon=no --guardian=no --control-console --loglevel=9
+fi
